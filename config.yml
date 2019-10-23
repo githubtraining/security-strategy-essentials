@@ -5,13 +5,245 @@ template:
   repo: security-strategy-essentials-template
   name: security-strategy-essentials
 before:
+  - type: updateBranchProtection
+  - type: createPullRequest
+    title: Update the vulnerable dependency
+    body: 03_update-dependency.md
+    head: update-dependency
+  - type: octokit
+    method: 'repos.get'
+    owner: '%payload.repository.owner.login%'
+    repo: '%payload.repository.name%'
+    action_id: gotten_repo
   - type: createIssue
-    title: Welcome!
-    body: new-issue.md
+    title: Welcome
+    body: 01a_class-introduction-issue.md
+    data:
+      private: '%actions.gotten_repo.data.private%'
+  - type: createPullRequest
+    title: Add a `.gitignore` file
+    body: 04b_add-gitignore.md
+    head: add-gitignore
+  - type: createPullRequest
+    title: Add wolverine to game
+    body: 04b_add-wolverine.md #body of pull request to add wolverine to game
+    head: add-wolverine
+
 steps:
-  - title: First step
-    description: The first step in your course
-    event: issues.assigned
+  - title: Enable repository settings
+    description: Enable settings in your repository for the next activities.
+    event: page_build
+    link: '{{ repoUrl }}/issues/2'
+    actions:
+      - type: createIssue
+        title: Find repository vulnerabilities
+        body: 02_find-vulnerabilities.md
+        action_id: issue
+      - type: closeIssue
+        issue: Welcome
+      - type: octokit
+        method: repos.getPages
+        owner: '%payload.repository.owner.login%'
+        repo: '%payload.repository.name%'
+        action_id: pagesUrl
+      - type: respond
+        issue: Welcome
+        with: 02_closed-issue.md
+        data:
+          url: '%actions.issue.data.html_url%'
+          pages: '%actions.pagesUrl.data.html_url%'
+
+  - title: Find the vulnerable dependency
+    description: Find the vulnerable dependency, and comment with the suggested update version.
+    event: issue_comment.created
+    link: '{{ repoUrl }}/issues/4'
+    actions:
+      - type: respond
+        with: 03_found-vulnerability.md
+      - type: closeIssue
+        issue: Find repository vulnerabilities
+
+  - title: Update the dependency version
+    description: Edit the file in the pull request to update the dependency.
+    event: pull_request.synchronize
+    link: '{{ repoUrl }}/pull/1'
+    actions:
+      - type: getFileContents
+        action_id: fileContents
+        filename: package.json
+      - type: gate
+        left: '/"debug": "[\^\~\>]?\=?\d+\.\d+\.\d+"/g'
+        operator: test
+        right: '%actions.fileContents%'
+        else:
+        - type: respond
+          issue: 3
+          with: 03_adding-bad-changes.md
+      - type: removeBranchProtection
+      - type: respond
+        with: 03_good-pr.md
+
+  - title: Merge your pull request
+    description: Merge the pull request you've opened to update the vulnerability dependency.
+    event: pull_request.closed
+    link: '{{ repoUrl }}/pull/1'
+    actions:
+      - type: gate
+        left: '%payload.pull_request.merged%'
+        else:
+          - type: octokit
+            method: issues.edit
+            state: open
+            owner: '%payload.repository.owner.login%'
+            repo: '%payload.repository.name%'
+            number: '%payload.repository.pull_request.number%'
+          - type: respond
+            with: 03_accidental-close.md
+      - type: updateBranchProtection
+      - type: createIssue
+        title: Add dependabot to your repository
+        body: 02_trigger-wip.md #dependabot issue body response
+        action_id: dependabot_issue
+      - type: respond
+        with: 04a_good-merge.md #Link to dependabot issue
+
+  - title: Enable dependabot
+    description: Install dependabot on your repository.
+    event: issues.closed
+    link: '{{ repoUrl }}/issues/5'
+    actions:
+    - type: createIssue
+      title: Add a Security Policy
+      body: 02_trigger-wip.md #security policy issue body
+      action_id: security_issue
+    - type: respond
+      with: 01_successful-close.md #link to security issue
+
+  - title: Create a SECURITY.md file
+    description: Add a SECURITY.md file to your repository.
+    event: pull_request.opened
+    link: '{{ repoUrl }}/pull/4'
+
+  - title: Merge the pull request
+
+  #respond with bot in wolverine PR
+
+  - title: Remove sensitive data in a pull request
+    description: Remove sensitive data pushed to a pull request
+    event: pull_request.synchronize
+    link: '{{ repoUrl }}/pull/3'
+    actions:
+    - type: octokit
+      method: pullRequests.listFiles
+      owner: '%payload.repository.owner.login%'
+      repo: '%payload.repository.name%'
+      number: '%payload.pull_request.number%'
+      action_id: pr_files
+    - type: gate
+      left: '%actions.pr_files.data%'
+      operator: includes
+      right: 'filename:.env'
+      else:
+          - type: respond
+            with: 03_make-file-changes.md #failed response to remove .env file
+    - type: respond
+      with: 03_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
+
+  - title: Merge the pull request
+
+  - title: Add a `.gitignore` file
+    description: The `.gitignore` file is ready to be edited in an open pull request. Add the `.env` file to the `.gitignore` file.
+    event: pull_request.synchronize
+    link: '{{ repoUrl }}/pull/4'
+    actions:
+      - type: getFileContents
+        action_id: fileContents
+        filename: .gitignore
+      - type: gate
+        left: '/\.env/m'
+        operator: test
+        right: '%actions.fileContents%'
+        else:
+        - type: respond
+          with: 05_fail-ignore.md
+      - type: removeBranchProtection
+      - type: respond
+        with: 05_good-ignore.md
+
+  - title: Merge the pull request
+    description: Merge the second pull request with updates to the `.gitignore` file.
+    event: pull_request.closed
+    link: '{{ repoUrl }}/pull/4'
+    actions:
+      - type: gate
+        left: '%payload.pull_request.merged%'
+        else:
+          - type: octokit
+            method: issues.edit
+            state: open
+            owner: '%payload.repository.owner.login%'
+            repo: '%payload.repository.name%'
+            number: '%payload.repository.pull_request.number%'
+          - type: respond
+            with: 05_early-close.md
+      - type: createIssue
+        title: Sensitive data committed to history
+        body: 06b_committed-sensitive-data.md # sensitive data in history isse body | instruct learner to force push change in a PR and bot will respond there
+        action_id: committedData
+      - type: removeBranchProtection
+      - type: respond
+        with: 06a_nice-merge.md # response to next issue on resolving committed data
+        data:
+          url: '%actions.committedData.data.html_url%'
+
+  - title: Find historical reference to a previous .env file
+    description: Find historical reference to a previously committed .env file
+    event: issue_comment.created
+    link: '{{ repoUrl }}/issues/5'
+    actions:
+      - type: gate
+        left: '848cd8c2043f6161a4f0043bffee212777281494'
+        operator: test
+        right: '%payload.comment.body%'
+        required: false
+        else:
+          - type: respond
+            with: nice-try-message with next steps.md
+      - type: respond
+        with: nice-job-message with next steps.md
+        action_id: historicalCommit
+
+  - title: Remove historical reference to a previous .env file
+    description: Remove historical reference to a previously committed .env file
+    event: push
     link: '{{ repoUrl }}'
     actions:
-      - type: closeIssue
+      - type: getFileContents
+        filename: .env
+        sha: 848cd8c2043f6161a4f0043bffee212777281494
+      - type: gate
+        left: 'NODE_ENV=development
+               PORT=8626
+               # Set your database/API connection information here
+               API_KEY=SENSITIVE-VALUE-DATA
+               API_URL=SENSITIVE-VALUE-DATA'
+        operator: test
+        right: '%actions.fileContents%'
+        else:
+          - type: respond
+            with: try-again-response.md
+      - type: octokit
+        method: repos.getPages
+        owner: '%payload.repository.owner.login%'
+        repo: '%payload.repository.name%'
+        action_id: pagesUrl
+      - type: createIssue
+        title: Congratulations!
+        body: 06b_final-issue.md # Final issue
+        data:
+          url: '%actions.pagesUrl.data.html_url%'
+        action_id: finalIssue
+      - type: respond
+        with: nice-job.md # replace with nice job removing .env file response
+        data:
+          url: '%actions.finalIssue.data.html_url%'
