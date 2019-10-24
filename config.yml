@@ -30,6 +30,11 @@ before:
     head: add-wolverine
 
 steps:
+
+  # Step 1
+  # Learner enables GH pages for game
+  # Bot creates issue to report a vulnerability
+
   - title: Enable repository settings
     description: Enable settings in your repository for the next activities.
     event: page_build
@@ -53,6 +58,10 @@ steps:
           url: '%actions.issue.data.html_url%'
           pages: '%actions.pagesUrl.data.html_url%'
 
+  # Step 2
+  # Learner comments on issue the updated version
+  # Bot closes issue and responds with making change in PR
+
   - title: Find the vulnerable dependency
     description: Find the vulnerable dependency, and comment with the suggested update version.
     event: issue_comment.created
@@ -62,6 +71,10 @@ steps:
         with: 03_found-vulnerability.md
       - type: closeIssue
         issue: Find repository vulnerabilities
+
+  # Step 3
+  # Learner updates the dependency
+  # Bot responds
 
   - title: Update the dependency version
     description: Edit the file in the pull request to update the dependency.
@@ -82,6 +95,11 @@ steps:
       - type: removeBranchProtection
       - type: respond
         with: 03_good-pr.md
+
+  # Step 4
+  # Learner merges in the PR
+  # Bot creates new issue talking about automating process with dependabot
+  # Bot responds with link to new issue
 
   - title: Merge your pull request
     description: Merge the pull request you've opened to update the vulnerability dependency.
@@ -107,6 +125,10 @@ steps:
       - type: respond
         with: 04a_good-merge.md #Link to dependabot issue
 
+  # Step 5
+  # Learner installs dependabot on repository and closes the issue when done
+  # Bot creates new issue about adding a security policy in a PR. Links to PR (Perhaps just a response and not a new issue)
+
   - title: Enable dependabot
     description: Install dependabot on your repository.
     event: issues.closed
@@ -119,14 +141,24 @@ steps:
     - type: respond
       with: 01_successful-close.md #link to security issue
 
+  # Step 6
+  # Learner adds a security polcy through the security tab in a new PR
+  # Bot responds in PR with suggested information about the security policy. Prompts learner to merge when ready.
+
   - title: Create a SECURITY.md file
     description: Add a SECURITY.md file to your repository.
     event: pull_request.opened
     link: '{{ repoUrl }}/pull/4'
 
+  # Step 7
+  # Learner merges the PR
+  # Bot responds with link to new PR acting as a contributor making a change to the repository with accidental sensitive data committed
+
   - title: Merge the pull request
 
-  #respond with bot in wolverine PR
+  # Step 8
+  # Learner removes sensitive data in PR
+  # Bot responds with information on sensitive data and contacting support for garbage collection and caching
 
   - title: Remove sensitive data in a pull request
     description: Remove sensitive data pushed to a pull request
@@ -149,7 +181,15 @@ steps:
     - type: respond
       with: 03_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
 
-  - title: Merge the pull request
+  # Step 9
+  # Learner approves PR
+  # Bot merges PR and responds with link to new PR to create a .gitignore file
+
+  - title: Approve the pull request
+
+  # Step 10
+  # Learner adds .env to the .gitignore file
+  # Bot validates file update
 
   - title: Add a `.gitignore` file
     description: The `.gitignore` file is ready to be edited in an open pull request. Add the `.env` file to the `.gitignore` file.
@@ -169,6 +209,11 @@ steps:
       - type: removeBranchProtection
       - type: respond
         with: 05_good-ignore.md
+
+  # Step 11
+  # Learner merges PR
+  # Bot creates new issue about sensitive date in the repository's history
+  # Bot prompts learner to provide first commit SHA ID that needs to be removed
 
   - title: Merge the pull request
     description: Merge the second pull request with updates to the `.gitignore` file.
@@ -196,6 +241,10 @@ steps:
         data:
           url: '%actions.committedData.data.html_url%'
 
+  # Step 12
+  # Learner comments in issue the commit SHA ID that added the sensitive file
+  # Bot validates comment
+
   - title: Find historical reference to a previous .env file
     description: Find historical reference to a previously committed .env file
     event: issue_comment.created
@@ -212,6 +261,11 @@ steps:
       - type: respond
         with: nice-job-message with next steps.md
         action_id: historicalCommit
+
+  # Step 13
+  # Learner force pushes change to remove historical references of committed file data (commit to add and commit to remove)
+  # Bot validates removal of historical reference 
+  # Bot responds with congratulations issue
 
   - title: Remove historical reference to a previous .env file
     description: Remove historical reference to a previously committed .env file
