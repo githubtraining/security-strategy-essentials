@@ -91,7 +91,7 @@ steps:
   # Step 4
   # Learner merges in the PR
   # Bot creates new issue talking about automating process with dependabot
-  # Bot responds with link to new issue
+  # Bot responds with link to new issue. Instrucs learner to install and close issue when done
 
   - title: Merge your pull request
     description: Merge the pull request you've opened to update the vulnerability dependency.
@@ -113,13 +113,15 @@ steps:
       - type: createIssue
         title: Add dependabot to your repository
         body: 04_add-dependabot.md #dependabot issue body response
-        action_id: dependabot_issue
+        action_id: dependabotIssue
       - type: respond
         with: 04_good-merge.md #Link to dependabot issue
+        data:
+          url: '%actions.dependabotIssue.data.html_url%'
 
   # Step 5
-  # Learner installs dependabot on repository and closes the issue when done
-  # Bot creates new issue about adding a security policy. (Perhaps just a response and not a new issue)
+  # Learner installs dependabot on repository and closes the issue
+  # Bot creates new issue about adding a security policy with suggested information about the security policy. Prompts learner to merge when ready
 
   - title: Enable dependabot
     description: Install dependabot on your repository.
@@ -137,7 +139,6 @@ steps:
 
   # Step 6
   # Learner adds a security polcy through the security tab thereby creating a new PR
-  # Bot responds in PR with suggested information about the security policy. Prompts learner to merge when ready
   # Learner merges the PR
   # Bot responds with link to new PR acting as a contributor making a change to the repository with accidental sensitive data committed to PR
 
@@ -165,6 +166,7 @@ steps:
   # Step 7
   # Learner removes sensitive data in PR
   # Bot responds with information on sensitive data and contacting support for garbage collection and caching
+  # Bot prompts learner to approve the PR
 
   - title: Remove sensitive data in a pull request
     description: Remove sensitive data pushed to a pull request
@@ -270,6 +272,7 @@ steps:
   # Step 11
   # Learner comments in issue the commit SHA ID that added the sensitive file
   # Bot validates comment
+  # Bot prompts learner to force push changes to remove history reference of these commits
 
   - title: Find historical reference to a previous .env file
     description: Find historical reference to a previously committed .env file
@@ -319,7 +322,7 @@ steps:
         action_id: pagesUrl
       - type: createIssue
         title: Congratulations!
-        body: 12_final-issue.md # Final issue
+        body: 12_final-issue.md
         data:
           url: '%actions.pagesUrl.data.html_url%'
         action_id: finalIssue

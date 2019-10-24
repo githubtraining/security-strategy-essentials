@@ -1,0 +1,6 @@
+Uh oh @{{ user.username }}, something went wrong! I wasn't expecting this change. Please go over the instructions again and make sure you've followed them as exactly as you can.
+
+### Hint:
+Make sure you use one of the below commands to remove reference to these commits.
+
+If you would like help troubleshooting, create a post on the [GitHub Community]({{ communityBoard }}) board. You might also want to search for your issue to see if other people have resolved it in the past.
