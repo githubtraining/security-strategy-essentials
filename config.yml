@@ -17,7 +17,7 @@ before:
     action_id: gotten_repo
   - type: createIssue
     title: Welcome
-    body: 01a_class-introduction-issue.md
+    body: 00_class-introduction-issue.md
     data:
       private: '%actions.gotten_repo.data.private%'
 
@@ -34,7 +34,7 @@ steps:
     actions:
       - type: createIssue
         title: Find repository vulnerabilities
-        body: 02_find-vulnerabilities.md
+        body: 01_find-vulnerabilities.md
         action_id: firstIssue
       - type: closeIssue
         issue: Welcome
@@ -45,7 +45,7 @@ steps:
         action_id: pagesUrl
       - type: respond
         issue: Welcome
-        with: 02_closed-issue.md
+        with: 01_closed-issue.md
         data:
           url: '%actions.firstIssue.data.html_url%'
           pages: '%actions.pagesUrl.data.html_url%'
@@ -57,10 +57,10 @@ steps:
   - title: Find the vulnerable dependency
     description: Find the vulnerable dependency, and comment with the suggested update version.
     event: issue_comment.created
-    link: '{{ repoUrl }}/issues/4'
+    link: '{{ repoUrl }}/issues/3'
     actions:
       - type: respond
-        with: 03_found-vulnerability.md
+        with: 02_found-vulnerability.md
       - type: closeIssue
         issue: Find repository vulnerabilities
 
@@ -108,14 +108,14 @@ steps:
           repo: '%payload.repository.name%'
           number: '%payload.repository.pull_request.number%'
         - type: respond
-          with: 03_accidental-close.md
+          with: 04_accidental-close.md
       - type: updateBranchProtection
       - type: createIssue
         title: Add dependabot to your repository
-        body: 02_trigger-wip.md #dependabot issue body response
+        body: 04_trigger-wip.md #dependabot issue body response
         action_id: dependabot_issue
       - type: respond
-        with: 04a_good-merge.md #Link to dependabot issue
+        with: 04_good-merge.md #Link to dependabot issue
 
   # Step 5
   # Learner installs dependabot on repository and closes the issue when done
@@ -124,14 +124,14 @@ steps:
   - title: Enable dependabot
     description: Install dependabot on your repository.
     event: issues.closed
-    link: '{{ repoUrl }}/issues/5'
+    link: '{{ repoUrl }}/issues/4'
     actions:
     - type: createIssue
       title: Add a Security Policy
-      body: 02_trigger-wip.md #security policy issue body (add branch name instructions and examples)
+      body: 05_trigger-wip.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
     - type: respond
-      with: 01_successful-close.md #link to security issue
+      with: 05_successful-close.md #link to security issue
       data:
         url: '%actions.securityIssue.data.html_url%'
 
@@ -144,20 +144,20 @@ steps:
   - title: Add a SECURITY.md file
     description: Add a SECURITY.md file to your repository.
     event: pull_request.closed
-    link: '{{ repoUrl }}/pull/4'
+    link: '{{ repoUrl }}/pull/6'
     actions:
       - type: gate
           left: '%payload.pull_request.merged%'
         else:
         - type: respond
-          with: REPLACE-ME.md #error response that PR was closed not merged. Reopen PR
+          with: 06_REPLACE-ME.md #error response that PR was closed not merged. Reopen PR
       - type: createPullRequest
         title: Add wolverine octocat to game
         body: replace-me.md # body of the contributor PR
         head: add-wolverine
         action_id: addWolverine
       - type: respond
-        with: replace.md # Bot response to new PR
+        with: 06_replace.md # Bot response to new PR
         data:
           url: '%actions.addWolverine.data.html_url%'
 
@@ -169,7 +169,7 @@ steps:
   - title: Remove sensitive data in a pull request
     description: Remove sensitive data pushed to a pull request
     event: pull_request.synchronize
-    link: '{{ repoUrl }}/pull/3'
+    link: '{{ repoUrl }}/pull/7'
     actions:
     - type: octokit
       method: pullRequests.listFiles
@@ -183,9 +183,9 @@ steps:
       right: 'filename:.env'
       else:
       - type: respond
-        with: 03_make-file-changes.md #failed response to remove .env file
+        with: 07_make-file-changes.md #failed response to remove .env file
     - type: respond
-      with: 03_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
 
   # Step 8
   # Learner approves PR
@@ -194,7 +194,7 @@ steps:
   - title: Approve the pull request
     description: Approve the contributors pull request
     event: pull_request_review.submitted
-    link: '{{ repoUrl }}/pull/4'
+    link: '{{ repoUrl }}/pull/7'
     actions:
       - type: gate
         left: '%payload.review.state%'
@@ -202,7 +202,7 @@ steps:
         right: approved
         else:
         - type: respond
-          with: 05_fail-ignore.md # add response to add an approving review
+          with: 08_fail-ignore.md # add response to add an approving review
       - type: mergePullRequest
       - type: createPullRequest
         title: Add .gitignore file
@@ -210,7 +210,7 @@ steps:
         head: add-gitignore
         action_id: addGitignore
       - type: respond
-        with: replace.md # Bot response to new PR
+        with: 08_replace.md # Bot response to new PR
         data:
           url: '%actions.addGitignore.data.html_url%'
 
@@ -221,7 +221,7 @@ steps:
   - title: Add a `.gitignore` file
     description: The `.gitignore` file is ready to be edited in an open pull request. Add the `.env` file to the `.gitignore` file.
     event: pull_request.synchronize
-    link: '{{ repoUrl }}/pull/4'
+    link: '{{ repoUrl }}/pull/8'
     actions:
       - type: getFileContents
         action_id: fileContents
@@ -232,10 +232,10 @@ steps:
         right: '%actions.fileContents%'
         else:
         - type: respond
-          with: 05_fail-ignore.md
+          with: 09_fail-ignore.md
       - type: removeBranchProtection
       - type: respond
-        with: 05_good-ignore.md
+        with: 09_good-ignore.md
 
   # Step 10
   # Learner merges PR
@@ -245,7 +245,7 @@ steps:
   - title: Merge the pull request
     description: Merge the second pull request with updates to the `.gitignore` file.
     event: pull_request.closed
-    link: '{{ repoUrl }}/pull/4'
+    link: '{{ repoUrl }}/pull/8'
     actions:
       - type: gate
         left: '%payload.pull_request.merged%'
@@ -257,13 +257,13 @@ steps:
             repo: '%payload.repository.name%'
             number: '%payload.repository.pull_request.number%'
           - type: respond
-            with: 05_early-close.md
+            with: 10_early-close.md
       - type: createIssue
         title: Sensitive data committed to history
-        body: 06b_committed-sensitive-data.md # sensitive data in history isse body | instruct learner to force push change in a PR and bot will respond there
+        body: 10_committed-sensitive-data.md # sensitive data in history isse body | instruct learner to force push change in a PR and bot will respond there
         action_id: committedData
       - type: respond
-        with: 06a_nice-merge.md # response to next issue on resolving committed data
+        with: 10_nice-merge.md # response to next issue on resolving committed data
         data:
           url: '%actions.committedData.data.html_url%'
 
@@ -274,7 +274,7 @@ steps:
   - title: Find historical reference to a previous .env file
     description: Find historical reference to a previously committed .env file
     event: issue_comment.created
-    link: '{{ repoUrl }}/issues/5'
+    link: '{{ repoUrl }}/issues/9'
     actions:
       - type: gate
         left: '848cd8c2043f6161a4f0043bffee212777281494'
@@ -283,14 +283,14 @@ steps:
         required: false
         else:
           - type: respond
-            with: nice-try-message with next steps.md
+            with: 11_nice-try-message with next steps.md
       - type: respond
-        with: nice-job-message with next steps.md
+        with: 11_nice-job-message with next steps.md
         action_id: historicalCommit
 
   # Step 12
   # Learner force pushes change to remove historical references of committed file data (commit to add and commit to remove)
-  # Bot validates removal of historical reference (56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69 and 848cd8c2043f6161a4f0043bffee212777281494)
+  # Bot validates removal of historical reference of commits with sensitive data (56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69 and 848cd8c2043f6161a4f0043bffee212777281494)
   # Bot responds with congratulations issue
 
   - title: Remove historical reference to a previous .env file
@@ -311,7 +311,7 @@ steps:
         right: '%actions.fileContents%'
         else:
           - type: respond
-            with: try-again-response.md
+            with: 12_try-again-response.md
       - type: octokit
         method: repos.getPages
         owner: '%payload.repository.owner.login%'
@@ -325,6 +325,6 @@ steps:
         action_id: finalIssue
       - type: updateBranchProtection
       - type: respond
-        with: nice-job.md # replace with nice job removing .env file response
+        with: 12_nice-job.md # replace with nice job removing .env file response
         data:
           url: '%actions.finalIssue.data.html_url%'
