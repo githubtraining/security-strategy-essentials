@@ -148,7 +148,7 @@ steps:
     link: '{{ repoUrl }}/pull/6'
     actions:
       - type: gate
-          left: '%payload.pull_request.merged%'
+        left: '%payload.pull_request.merged%'
         else:
         - type: respond
           with: 06_error-close.md #error response that PR was closed not merged. Reopen PR
