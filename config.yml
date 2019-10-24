@@ -17,7 +17,7 @@ before:
     action_id: gotten_repo
   - type: createIssue
     title: Welcome
-    body: 00_class-introduction-issue.md
+    body: 00_introduction-issue.md
     data:
       private: '%actions.gotten_repo.data.private%'
 
@@ -112,7 +112,7 @@ steps:
       - type: updateBranchProtection
       - type: createIssue
         title: Add dependabot to your repository
-        body: 04_trigger-wip.md #dependabot issue body response
+        body: 04_add-dependabot.md #dependabot issue body response
         action_id: dependabot_issue
       - type: respond
         with: 04_good-merge.md #Link to dependabot issue
@@ -128,7 +128,7 @@ steps:
     actions:
     - type: createIssue
       title: Add a Security Policy
-      body: 05_trigger-wip.md #security policy issue body (add branch name instructions and examples)
+      body: 05_add-security-policy.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
     - type: respond
       with: 05_successful-close.md #link to security issue
@@ -150,14 +150,14 @@ steps:
           left: '%payload.pull_request.merged%'
         else:
         - type: respond
-          with: 06_REPLACE-ME.md #error response that PR was closed not merged. Reopen PR
+          with: 06_error-close.md #error response that PR was closed not merged. Reopen PR
       - type: createPullRequest
         title: Add wolverine octocat to game
-        body: replace-me.md # body of the contributor PR
+        body: 06_add-wolverine-image.md # body of the contributor PR
         head: add-wolverine
         action_id: addWolverine
       - type: respond
-        with: 06_replace.md # Bot response to new PR
+        with: 06_good-merge.md # Bot response to new PR
         data:
           url: '%actions.addWolverine.data.html_url%'
 
@@ -176,16 +176,16 @@ steps:
       owner: '%payload.repository.owner.login%'
       repo: '%payload.repository.name%'
       number: '%payload.pull_request.number%'
-      action_id: pr_files
+      action_id: prFiles
     - type: gate
-      left: '%actions.pr_files.data%'
+      left: '%actions.prFiles.data%'
       operator: includes
       right: 'filename:.env'
       else:
       - type: respond
-        with: 07_make-file-changes.md #failed response to remove .env file
+        with: 07_error-file-change.md #failed response to remove .env file
     - type: respond
-      with: 07_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_success-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
 
   # Step 8
   # Learner approves PR
@@ -202,15 +202,15 @@ steps:
         right: approved
         else:
         - type: respond
-          with: 08_fail-ignore.md # add response to add an approving review
+          with: 08_error-approval.md # add response to add an approving review
       - type: mergePullRequest
       - type: createPullRequest
         title: Add .gitignore file
-        body: replace-me.md # body of the .gitignore body
+        body: 08_add-gitignore.md # body of the .gitignore body
         head: add-gitignore
         action_id: addGitignore
       - type: respond
-        with: 08_replace.md # Bot response to new PR
+        with: 08_go-to-gitignore.md # Bot response to new PR
         data:
           url: '%actions.addGitignore.data.html_url%'
 
@@ -232,10 +232,10 @@ steps:
         right: '%actions.fileContents%'
         else:
         - type: respond
-          with: 09_fail-ignore.md
+          with: 09_error-file-change.md
       - type: removeBranchProtection
       - type: respond
-        with: 09_good-ignore.md
+        with: 09_good-file-change.md
 
   # Step 10
   # Learner merges PR
@@ -283,9 +283,9 @@ steps:
         required: false
         else:
           - type: respond
-            with: 11_nice-try-message with next steps.md
+            with: 11_wrong-commit-id.md
       - type: respond
-        with: 11_nice-job-message with next steps.md
+        with: 11_correct-commit-id.md
         action_id: historicalCommit
 
   # Step 12
@@ -319,12 +319,12 @@ steps:
         action_id: pagesUrl
       - type: createIssue
         title: Congratulations!
-        body: 06b_final-issue.md # Final issue
+        body: 12_final-issue.md # Final issue
         data:
           url: '%actions.pagesUrl.data.html_url%'
         action_id: finalIssue
       - type: updateBranchProtection
       - type: respond
-        with: 12_nice-job.md # replace with nice job removing .env file response
+        with: 12_correct-references-removed.md # replace with nice job removing .env file response
         data:
           url: '%actions.finalIssue.data.html_url%'
