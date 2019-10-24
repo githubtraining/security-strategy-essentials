@@ -1,6 +1,6 @@
 title: security-strategy-essentials
 tagline: A brand new course on Learning Lab
-description: 'Course repo for Learning Lab course "Security strategy essentials" '
+description: 'Course repo for Learning Lab course "Security strategy essentials"'
 template:
   repo: security-strategy-essentials-template
   name: security-strategy-essentials
@@ -35,7 +35,7 @@ steps:
       - type: createIssue
         title: Find repository vulnerabilities
         body: 02_find-vulnerabilities.md
-        action_id: issue
+        action_id: firstIssue
       - type: closeIssue
         issue: Welcome
       - type: octokit
@@ -47,7 +47,7 @@ steps:
         issue: Welcome
         with: 02_closed-issue.md
         data:
-          url: '%actions.issue.data.html_url%'
+          url: '%actions.firstIssue.data.html_url%'
           pages: '%actions.pagesUrl.data.html_url%'
 
   # Step 2
@@ -101,14 +101,14 @@ steps:
       - type: gate
         left: '%payload.pull_request.merged%'
         else:
-          - type: octokit
-            method: issues.edit
-            state: open
-            owner: '%payload.repository.owner.login%'
-            repo: '%payload.repository.name%'
-            number: '%payload.repository.pull_request.number%'
-          - type: respond
-            with: 03_accidental-close.md
+        - type: octokit
+          method: issues.edit
+          state: open
+          owner: '%payload.repository.owner.login%'
+          repo: '%payload.repository.name%'
+          number: '%payload.repository.pull_request.number%'
+        - type: respond
+          with: 03_accidental-close.md
       - type: updateBranchProtection
       - type: createIssue
         title: Add dependabot to your repository
@@ -119,7 +119,7 @@ steps:
 
   # Step 5
   # Learner installs dependabot on repository and closes the issue when done
-  # Bot creates new issue about adding a security policy in a PR. Links to PR (Perhaps just a response and not a new issue)
+  # Bot creates new issue about adding a security policy. (Perhaps just a response and not a new issue)
 
   - title: Enable dependabot
     description: Install dependabot on your repository.
@@ -129,15 +129,17 @@ steps:
     - type: createIssue
       title: Add a Security Policy
       body: 02_trigger-wip.md #security policy issue body (add branch name instructions and examples)
-      action_id: security_issue
+      action_id: securityIssue
     - type: respond
       with: 01_successful-close.md #link to security issue
+      data:
+        url: '%actions.securityIssue.data.html_url%'
 
   # Step 6
-  # Learner adds a security polcy through the security tab in a new PR
+  # Learner adds a security polcy through the security tab thereby creating a new PR
   # Bot responds in PR with suggested information about the security policy. Prompts learner to merge when ready
   # Learner merges the PR
-  # Bot responds with link to new PR acting as a contributor making a change to the repository with accidental sensitive data committed
+  # Bot responds with link to new PR acting as a contributor making a change to the repository with accidental sensitive data committed to PR
 
   - title: Add a SECURITY.md file
     description: Add a SECURITY.md file to your repository.
@@ -146,9 +148,9 @@ steps:
     actions:
       - type: gate
           left: '%payload.pull_request.merged%'
-      - type: mergeBranch
-        head: master
-        base: add-security-policy
+        else:
+        - type: respond
+          with: REPLACE-ME.md #error response that PR was closed not merged. Reopen PR
       - type: createPullRequest
         title: Add wolverine octocat to game
         body: replace-me.md # body of the contributor PR
@@ -180,8 +182,8 @@ steps:
       operator: includes
       right: 'filename:.env'
       else:
-          - type: respond
-            with: 03_make-file-changes.md #failed response to remove .env file
+      - type: respond
+        with: 03_make-file-changes.md #failed response to remove .env file
     - type: respond
       with: 03_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
 
@@ -260,7 +262,6 @@ steps:
         title: Sensitive data committed to history
         body: 06b_committed-sensitive-data.md # sensitive data in history isse body | instruct learner to force push change in a PR and bot will respond there
         action_id: committedData
-      - type: removeBranchProtection
       - type: respond
         with: 06a_nice-merge.md # response to next issue on resolving committed data
         data:
@@ -322,6 +323,7 @@ steps:
         data:
           url: '%actions.pagesUrl.data.html_url%'
         action_id: finalIssue
+      - type: updateBranchProtection
       - type: respond
         with: nice-job.md # replace with nice job removing .env file response
         data:
