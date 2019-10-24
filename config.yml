@@ -20,14 +20,6 @@ before:
     body: 01a_class-introduction-issue.md
     data:
       private: '%actions.gotten_repo.data.private%'
-  - type: createPullRequest
-    title: Add a `.gitignore` file
-    body: 04b_add-gitignore.md
-    head: add-gitignore
-  - type: createPullRequest
-    title: Add wolverine to game
-    body: 04b_add-wolverine.md #body of pull request to add wolverine to game
-    head: add-wolverine
 
 steps:
 
@@ -59,7 +51,7 @@ steps:
           pages: '%actions.pagesUrl.data.html_url%'
 
   # Step 2
-  # Learner comments on issue the updated version
+  # Learner comments on issue with the recommended updated version
   # Bot closes issue and responds with making change in PR
 
   - title: Find the vulnerable dependency
@@ -136,27 +128,39 @@ steps:
     actions:
     - type: createIssue
       title: Add a Security Policy
-      body: 02_trigger-wip.md #security policy issue body
+      body: 02_trigger-wip.md #security policy issue body (add branch name instructions and examples)
       action_id: security_issue
     - type: respond
       with: 01_successful-close.md #link to security issue
 
   # Step 6
   # Learner adds a security polcy through the security tab in a new PR
-  # Bot responds in PR with suggested information about the security policy. Prompts learner to merge when ready.
-
-  - title: Create a SECURITY.md file
-    description: Add a SECURITY.md file to your repository.
-    event: pull_request.opened
-    link: '{{ repoUrl }}/pull/4'
-
-  # Step 7
+  # Bot responds in PR with suggested information about the security policy. Prompts learner to merge when ready
   # Learner merges the PR
   # Bot responds with link to new PR acting as a contributor making a change to the repository with accidental sensitive data committed
 
-  - title: Merge the pull request
+  - title: Add a SECURITY.md file
+    description: Add a SECURITY.md file to your repository.
+    event: pull_request.closed
+    link: '{{ repoUrl }}/pull/4'
+    actions:
+      - type: gate
+          left: '%payload.pull_request.merged%'
+      - type: mergeBranch
+        head: master
+        base: add-security-policy
+      - type: createPullRequest
+        title: Add wolverine octocat to game
+        body: replace-me.md # body of the contributor PR
+        head: add-wolverine
+        action_id: addWolverine
+      - type: respond
+        with: replace.md # Bot response to new PR
+        data:
+          url: '%actions.addWolverine.data.html_url%'
 
-  # Step 8
+
+  # Step 7
   # Learner removes sensitive data in PR
   # Bot responds with information on sensitive data and contacting support for garbage collection and caching
 
@@ -181,13 +185,34 @@ steps:
     - type: respond
       with: 03_discovering-api-endpoints.md #success response to remove .env file | Add note about contacting support for garbage collection
 
-  # Step 9
+  # Step 8
   # Learner approves PR
   # Bot merges PR and responds with link to new PR to create a .gitignore file
 
   - title: Approve the pull request
+    description: Approve the contributors pull request
+    event: pull_request_review.submitted
+    link: '{{ repoUrl }}/pull/4'
+    actions:
+      - type: gate
+        left: '%payload.review.state%'
+        operator: ===
+        right: approved
+        else:
+        - type: respond
+          with: 05_fail-ignore.md # add response to add an approving review
+      - type: mergePullRequest
+      - type: createPullRequest
+        title: Add .gitignore file
+        body: replace-me.md # body of the .gitignore body
+        head: add-gitignore
+        action_id: addGitignore
+      - type: respond
+        with: replace.md # Bot response to new PR
+        data:
+          url: '%actions.addGitignore.data.html_url%'
 
-  # Step 10
+  # Step 9
   # Learner adds .env to the .gitignore file
   # Bot validates file update
 
@@ -210,7 +235,7 @@ steps:
       - type: respond
         with: 05_good-ignore.md
 
-  # Step 11
+  # Step 10
   # Learner merges PR
   # Bot creates new issue about sensitive date in the repository's history
   # Bot prompts learner to provide first commit SHA ID that needs to be removed
@@ -241,7 +266,7 @@ steps:
         data:
           url: '%actions.committedData.data.html_url%'
 
-  # Step 12
+  # Step 11
   # Learner comments in issue the commit SHA ID that added the sensitive file
   # Bot validates comment
 
@@ -262,9 +287,9 @@ steps:
         with: nice-job-message with next steps.md
         action_id: historicalCommit
 
-  # Step 13
+  # Step 12
   # Learner force pushes change to remove historical references of committed file data (commit to add and commit to remove)
-  # Bot validates removal of historical reference 
+  # Bot validates removal of historical reference (56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69 and 848cd8c2043f6161a4f0043bffee212777281494)
   # Bot responds with congratulations issue
 
   - title: Remove historical reference to a previous .env file
