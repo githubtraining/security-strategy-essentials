@@ -164,19 +164,19 @@ steps:
         else:
           - type: respond
             with: 06_accidental-close.md
-    - type: createPullRequest
-      title: Add wolverine octocat to game
-      body: 06_add-wolverine-image.md # body of the contributor PR
-      head: add-wolverine-image
-      action_id: addWolverine
-    - type: respond
-      issue: 7
-      with: 06_remove-sensitive-commit.md
-    - type: respond
-      issue: 6
-      with: 06_good-merge.md # Bot response to new PR
-      data:
-        url: '%actions.addWolverine.data.html_url%'
+      - type: createPullRequest
+        title: Add wolverine octocat to game
+        body: 06_add-wolverine-image.md # body of the contributor PR
+        head: add-wolverine-image
+        action_id: addWolverine
+      - type: respond
+        issue: 7
+        with: 06_remove-sensitive-commit.md
+      - type: respond
+        issue: 6
+        with: 06_good-merge.md # Bot response to new PR
+        data:
+          url: '%actions.addWolverine.data.html_url%'
 
 
   # Step 8
