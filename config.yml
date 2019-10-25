@@ -183,6 +183,7 @@ steps:
       method: pullRequests.listFiles
       owner: '%payload.repository.owner.login%'
       repo: '%payload.repository.name%'
+      number: '%payload.pull_request.number%'
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
@@ -241,7 +242,6 @@ steps:
         else:
         - type: respond
           with: 09_error-file-change.md
-      - type: removeBranchProtection
       - type: respond
         with: 09_good-file-change.md
 
