@@ -320,7 +320,7 @@ steps:
     link: '{{ repoUrl }}/issues/9'
     actions:
       - type: gate
-        filename: '848cd8c2043f6161a4f0043bffee212777281494','56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69'
+        filename: '848cd8c2043f6161a4f0043bffee212777281494, 56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69'
         operator: test
         right: '%payload.comment.body%'
         else:
