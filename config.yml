@@ -150,7 +150,8 @@ steps:
     actions:
       - type: createReview
         event: APPROVE
-        body: 06_suggest-merge.md #error response that PR was closed not merged. Reopen PR
+      - type: respond
+        with: 06_suggest-merge.md #error response that PR was closed not merged. Reopen PR
 
   # Step 7
 
@@ -217,7 +218,7 @@ steps:
       - type: gate
         left: '%payload.review.state%'
         operator: ===
-        right: approved
+        right: 'approved'
         else:
         - type: respond
           with: 08_error-approval.md # add response to add an approving review
