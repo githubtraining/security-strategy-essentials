@@ -154,7 +154,7 @@ steps:
 
   # Step 7
 
-  - title:
+  - title: Merge the pull request
     description: Merge the pull request.
     event: pull_request.closed
     link: "{{ repoUrl }}/pull/6"
