@@ -253,6 +253,7 @@ steps:
         else:
         - type: respond
           with: 09_error-file-change.md
+      - type: updateBranchProtection
       - type: respond
         with: 09_good-file-change.md
 
@@ -300,13 +301,13 @@ steps:
         left: '848cd8c2043f6161a4f0043bffee212777281494'
         operator: test
         right: '%payload.comment.body%'
-        required: false
         else:
           - type: respond
             with: 11_wrong-commit-id.md
       - type: respond
         with: 11_correct-commit-id.md
         action_id: historicalCommit
+      - type: removeBranchProtection
 
   # Step 13
   # Learner force pushes change to remove historical references of committed file data (commit to add and commit to remove)
@@ -315,20 +316,13 @@ steps:
 
   - title: Remove historical reference to a previous .env file
     description: Remove historical reference to a previously committed .env file
-    event: push
-    link: '{{ repoUrl }}'
+    event: issue_comment.created
+    link: '{{ repoUrl }}/issues/9'
     actions:
-      - type: getFileContents
-        filename: .env
-        sha: 848cd8c2043f6161a4f0043bffee212777281494
       - type: gate
-        left: 'NODE_ENV=development
-               PORT=8626
-               # Set your database/API connection information here
-               API_KEY=SENSITIVE-VALUE-DATA
-               API_URL=SENSITIVE-VALUE-DATA'
+        filename: '848cd8c2043f6161a4f0043bffee212777281494','56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69'
         operator: test
-        right: '%actions.fileContents%'
+        right: '%payload.comment.body%'
         else:
           - type: respond
             with: 12_try-again-response.md
