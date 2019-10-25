@@ -173,7 +173,7 @@ steps:
 
   - title: Remove sensitive data in a pull request
     description: Remove sensitive data pushed to a pull request
-    event: pull_request.synchronize
+    event: push
     link: '{{ repoUrl }}/pull/7'
     actions:
     - type: octokit
@@ -188,9 +188,9 @@ steps:
       right: 'filename:.env'
       else:
       - type: respond
-        with: 07_error-file-change.md #failed response to remove .env file
+        with: 07_success-file-change.md #failed response to remove .env file
     - type: respond
-      with: 07_success-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
 
   # Step 8
   # Learner approves PR
