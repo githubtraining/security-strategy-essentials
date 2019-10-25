@@ -212,6 +212,7 @@ steps:
         - type: respond
           with: 08_error-approval.md # add response to add an approving review
       - type: mergePullRequest
+        pullRequest: Add wolverine octocat to game
       - type: createPullRequest
         title: Add .gitignore file
         body: 08_add-gitignore.md # body of the .gitignore body
