@@ -133,6 +133,7 @@ steps:
       body: 05_add-security-policy.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
     - type: respond
+      issue: 4
       with: 05_successful-close.md #link to security issue
       data:
         url: '%actions.securityIssue.data.html_url%'
