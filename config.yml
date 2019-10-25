@@ -132,7 +132,6 @@ steps:
       title: Add a Security Policy
       body: 05_add-security-policy.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
-    - type: removeBranchProtection
     - type: respond
       issue: 4
       with: 05_successful-close.md #link to security issue
@@ -141,35 +140,46 @@ steps:
 
   # Step 6
   # Learner adds a security polcy through the security tab thereby creating a new PR
-  # Learner merges the PR
-  # Bot responds with link to new PR acting as a contributor making a change to the repository with accidental sensitive data committed to PR
+  # Bot approves the PR
+  # Bot prompts user to merge when ready
 
   - title: Add a SECURITY.md file
     description: Add a SECURITY.md file to your repository.
-    event: pull_request.closed
+    event: pull_request.opened
     link: '{{ repoUrl }}/pull/6'
     actions:
-      - type: gate
-        left: '%payload.pull_request.merged%'
-        else:
-        - type: respond
-          with: 06_error-close.md #error response that PR was closed not merged. Reopen PR
-      - type: createPullRequest
-        title: Add wolverine octocat to game
-        body: 06_add-wolverine-image.md # body of the contributor PR
-        head: add-wolverine-image
-        action_id: addWolverine
-      - type: respond
-        issue: 7
-        with: 06_remove-sensitive-commit.md
-      - type: respond
-        issue: 6
-        with: 06_good-merge.md # Bot response to new PR
-        data:
-          url: '%actions.addWolverine.data.html_url%'
-
+      - type: createReview
+        event: APPROVE
+        body: 06_suggest-merge.md #error response that PR was closed not merged. Reopen PR
 
   # Step 7
+
+  - title:
+    description: Merge the pull request.
+    event: pull_request.closed
+    link: "{{ repoUrl }}/pull/6"
+    actions:
+      - type: gate
+        left: "%payload.pull_request.merged%"
+        else:
+          - type: respond
+            with: 06_accidental-close.md
+    - type: createPullRequest
+      title: Add wolverine octocat to game
+      body: 06_add-wolverine-image.md # body of the contributor PR
+      head: add-wolverine-image
+      action_id: addWolverine
+    - type: respond
+      issue: 7
+      with: 06_remove-sensitive-commit.md
+    - type: respond
+      issue: 6
+      with: 06_good-merge.md # Bot response to new PR
+      data:
+        url: '%actions.addWolverine.data.html_url%'
+
+
+  # Step 8
   # Learner removes sensitive data in PR
   # Bot responds with information on sensitive data and contacting support for garbage collection and caching
   # Bot prompts learner to approve the PR
@@ -195,7 +205,7 @@ steps:
     - type: respond
       with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
 
-  # Step 8
+  # Step 9
   # Learner approves PR
   # Bot merges PR and responds with link to new PR to create a .gitignore file
 
@@ -223,7 +233,7 @@ steps:
         data:
           url: '%actions.addGitignore.data.html_url%'
 
-  # Step 9
+  # Step 10
   # Learner adds .env to the .gitignore file
   # Bot validates file update
 
@@ -245,7 +255,7 @@ steps:
       - type: respond
         with: 09_good-file-change.md
 
-  # Step 10
+  # Step 11
   # Learner merges PR
   # Bot creates new issue about sensitive date in the repository's history
   # Bot prompts learner to provide first commit SHA ID that needs to be removed
@@ -275,7 +285,7 @@ steps:
         data:
           url: '%actions.committedData.data.html_url%'
 
-  # Step 11
+  # Step 12
   # Learner comments in issue the commit SHA ID that added the sensitive file
   # Bot validates comment
   # Bot prompts learner to force push changes to remove history reference of these commits
@@ -297,7 +307,7 @@ steps:
         with: 11_correct-commit-id.md
         action_id: historicalCommit
 
-  # Step 12
+  # Step 13
   # Learner force pushes change to remove historical references of committed file data (commit to add and commit to remove)
   # Bot validates removal of historical reference of commits with sensitive data (56d6fbbd3bcb476b2829c0dff411e3e0b9b03b69 and 848cd8c2043f6161a4f0043bffee212777281494)
   # Bot responds with congratulations issue
