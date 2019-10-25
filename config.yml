@@ -160,6 +160,9 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
+        issue: 7
+        with: 06_remove-sensitive-commit.md
+      - type: respond
         issue: 6
         with: 06_good-merge.md # Bot response to new PR
         data:
@@ -173,7 +176,7 @@ steps:
 
   - title: Remove sensitive data in a pull request
     description: Remove sensitive data pushed to a pull request
-    event: push
+    event: pull_request.synchronize
     link: '{{ repoUrl }}/pull/7'
     actions:
     - type: octokit
