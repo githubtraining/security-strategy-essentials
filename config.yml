@@ -160,7 +160,7 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
-        pull: 6
+        issue: 6
         with: 06_good-merge.md # Bot response to new PR
         data:
           url: '%actions.addWolverine.data.html_url%'
