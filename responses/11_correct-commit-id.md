@@ -5,13 +5,13 @@ Nice, that's the commit that added the `.env` file. We'll need to remove the con
 We can do this with the following commands:
 
 1. Since we cloned the repository earlier, let's run `git checkout master` to put us back on the master branch
-1. Run `git pull` to update our local repository with the changes we merged from the contributor's pull request
+1. Run `git pull` to update your local repository with the changes we merged from the contributor's pull request
 1. Run `git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD` to remove the historical reference to the `.env` file
 
   **Note:** There is a lot going on with this command. We won't be diving into everything this command is doing, but it's filtering through the master branch and removing any cached reference to a `.env` file.
 
 1. Next, let's run `git push -f` to force push this change to the master branch
-1. Let's now run `git log --oneline` to get a list of our modified commit hisotry
+1. Let's now run `git log --oneline` to get a list of our modified commit history
 1. Paste your log output into this issue as a comment
 
 <details>

@@ -2,7 +2,7 @@
 
 ![celebrate](https://octodex.github.com/images/Fintechtocat.png)
 
-Congratulations @{{ user.username }}, you've completed this course! You can see your published [memory game on GitHub Pages]({{ pagesURL }}) with the updated wolverine image.
+Congratulations @{{ user.username }}, you've completed this course! You can see your published [memory game on GitHub Pages]({{ pagesUrl }}) with the updated wolverine image.
 
 When considering the security of your repository, consider the installed applications, like me. Every app installed on your repository has access to some of your data. Even if it is harmless (like me), it is a good idea to periodically check and prune the list of installed apps and integrations on your repositories. Look for things like active use, or permissions giving more access than necessary.
 

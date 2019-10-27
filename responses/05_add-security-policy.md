@@ -16,11 +16,11 @@ Just like a `README.md` file, it really depends on your repository and the requi
 
 ## Step 6: Add a SECURITY.md file
 
-1. Navigate to the [Security]({{ repoUrl }}/)
+1. Navigate to the [Security]({{ repoUrl }}/network/alerts) tab
 1. Click on Policy located in the left sidebar
 1. Click the `Start Setup` button
-1. Commit the template security policy to the new branch as selected
-1. Create the pull request
+1. Commit the template security policy to the new branch as selected `{{ user.username }}-patch-1`
+1. Commit the new file and create the pull request
 
 <hr>
 <h3 align="center">I'll respond in your pull request with next steps.</h3>
