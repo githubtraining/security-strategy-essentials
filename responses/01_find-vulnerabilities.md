@@ -4,11 +4,16 @@ Security vulnerabilities can cause a range of problems for your project or the p
 
 This repository has some existing dependencies which will need updating to stay secure.
 
-### How can we identify dependencies and if they are vulnerable?
+<details>
+  <summary>How can we identify dependencies and if they are vulnerable?</summary>
+  <hr>
 
 This repository is a Node.js project utilizing NPM. Because of that, the `package.json` defines this repository's dependencies.  For our time together, we'll be focusing on these JavaScript dependencies. Keep in mind that different programming languages may have different dependency files. You might work with a `Gemfile`, `Gemfile.lock`, `*.gemspec`, `requirements.txt`, `pipfile.lock`, or other files.
 
 How can we know these dependencies are secure? It's not always easy, but GitHub is watching out.
+
+  <hr>
+</details>
 
 ### GitHub's security alerts for vulnerable dependencies
 

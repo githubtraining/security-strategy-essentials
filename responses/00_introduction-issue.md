@@ -1,4 +1,4 @@
-## :tada: Welcome to Securing your workflows!
+## :tada: Welcome to Security strategy essentials!
 
 In this course, you'll learn how to build and host a secure repository in GitHub.  A secure repository is important for many reasons.
 - Prevents exposing sensitive data
@@ -10,7 +10,9 @@ In this course you will learn how to:
 - Opt-in to vulnerability alerts for private repositories
   - _Note: These security settings are default for public repositories that are not forks._
 - Detect and fix vulnerable dependencies when notified by a vulnerability alert
+- Automate outdated dependency detection with dependabot
 - Follow security best practices to protect sensitive data by using a `.gitignore` file
+- Remove sensitive data and files committed to a repository
 
 ### New to GitHub?
 

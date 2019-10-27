@@ -1,4 +1,4 @@
-Nice job adding dependabot.
+Nice job adding Dependabot.
 
 
 <hr>

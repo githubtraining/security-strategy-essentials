@@ -255,6 +255,7 @@ steps:
           with: 09_error-file-change.md
       - type: respond
         with: 09_good-file-change.md
+      - type: removeBranchProtection
 
   # Step 11
   # Learner merges PR
@@ -306,7 +307,6 @@ steps:
       - type: respond
         with: 11_correct-commit-id.md
         action_id: historicalCommit
-      - type: removeBranchProtection
 
   # Step 13
   # Learner force pushes change to remove historical references of committed file data (commit to add and commit to remove)
