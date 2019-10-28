@@ -196,13 +196,14 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: '==='
-      right: 'filename:index.js'
+      operator: includes
+      right: 'filename:.env'
+      required: false
       else:
       - type: respond
-        with: 07_error-file-change.md #failed response to remove .env file
+        with: 07_success-file-change.md #failed response to remove .env file
     - type: respond
-      with: 07_success-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
 
   # Step 9
   # Learner approves PR
