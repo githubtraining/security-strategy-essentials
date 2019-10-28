@@ -42,7 +42,6 @@ This project is centered around a memory game that will be deployed with GitHub 
 
 {% endif %}
 
-For a printable version of the steps in this course, check out the [Quick Reference Guide]({{ host }}/public/{{ course.slug }}.pdf).
 
 > Turning on GitHub Pages creates a deployment of your repository. I may take up to a minute to respond as I await the deployment.
 

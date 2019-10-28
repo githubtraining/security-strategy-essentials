@@ -20,9 +20,9 @@ You can enable automated security fixes for any repository that uses security al
 
 ![Screen Shot 2019-10-28 at 1 23 52 PM](https://user-images.githubusercontent.com/6351798/67711794-5c3ed180-f988-11e9-97ba-41451996a2fb.png)
 
-Here, we have a security alert on the **debug** dependency. Clicking on **debug** will show you the pull request created by Dependabot to update the dependency. We just updated to `2.6.9` but Dependabot noticed we are still outdated. 
+Here, we have a security alert on the **debug** dependency. Clicking on **debug** will show you the pull request created by Dependabot to update the dependency. We just updated to `2.6.9` but Dependabot noticed we are still outdated.
 
-Feel free to <a href="{{ repoUrl }}/pull/4">approve and merge in this pull request</a>.
+Feel free to <a href="{{ repoUrl }}/pull/3">approve and merge in this pull request</a>.
 
 <details>
   <summary>How to Install Dependabot if not enabled through automated security fixes</summary>
