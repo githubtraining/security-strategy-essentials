@@ -170,6 +170,7 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
+        issue: 8
         with: 06_remove-sensitive-commit.md
       - type: respond
         with: 06_good-merge.md
@@ -195,7 +196,7 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: includes
+      operator: '!include'
       right: 'filename:.env'
       else:
       - type: respond
