@@ -196,8 +196,8 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: '!includes'
-      right: 'filename:.env'
+      operator: '==='
+      right: 'filename:js/index.js'
       else:
       - type: respond
         with: 07_error-file-change.md #failed response to remove .env file
