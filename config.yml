@@ -57,7 +57,7 @@ steps:
   - title: Find the vulnerable dependency
     description: Find the vulnerable dependency, and comment with the suggested update version.
     event: issue_comment.created
-    link: '{{ repoUrl }}/issues/3'
+    link: '{{ repoUrl }}/issues/4'
     actions:
       - type: respond
         with: 02_found-vulnerability.md
@@ -82,7 +82,7 @@ steps:
         right: '%actions.fileContents%'
         else:
         - type: respond
-          issue: 3
+          issue: 4
           with: 03_adding-bad-changes.md
       - type: removeBranchProtection
       - type: respond
@@ -126,14 +126,14 @@ steps:
   - title: Enable dependabot
     description: Install dependabot on your repository.
     event: issues.closed
-    link: '{{ repoUrl }}/issues/4'
+    link: '{{ repoUrl }}/issues/5'
     actions:
     - type: createIssue
       title: Add a Security Policy
       body: 05_add-security-policy.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
     - type: respond
-      issue: 4
+      issue: 5
       with: 05_successful-close.md #link to security issue
       data:
         url: '%actions.securityIssue.data.html_url%'
@@ -146,7 +146,7 @@ steps:
   - title: Add a SECURITY.md file
     description: Add a SECURITY.md file to your repository.
     event: pull_request.opened
-    link: '{{ repoUrl }}/pull/6'
+    link: '{{ repoUrl }}/pull/7'
     actions:
       - type: createReview
         event: APPROVE
@@ -157,7 +157,7 @@ steps:
   - title: Merge the pull request
     description: Merge the pull request.
     event: pull_request.closed
-    link: "{{ repoUrl }}/pull/6"
+    link: "{{ repoUrl }}/pull/7"
     actions:
       - type: gate
         left: "%payload.pull_request.merged%"
@@ -170,10 +170,10 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
-        issue: 7
+        issue: 8
         with: 06_remove-sensitive-commit.md
       - type: respond
-        issue: 6
+        issue: 7
         with: 06_good-merge.md # Bot response to new PR
         data:
           url: '%actions.addWolverine.data.html_url%'
@@ -187,7 +187,7 @@ steps:
   - title: Remove sensitive data in a pull request
     description: Remove sensitive data pushed to a pull request
     event: pull_request.synchronize
-    link: '{{ repoUrl }}/pull/7'
+    link: '{{ repoUrl }}/pull/8'
     actions:
     - type: octokit
       method: pullRequests.listFiles
@@ -212,7 +212,7 @@ steps:
   - title: Approve the pull request
     description: Approve the contributors pull request
     event: pull_request_review.submitted
-    link: '{{ repoUrl }}/pull/7'
+    link: '{{ repoUrl }}/pull/8'
     actions:
       - type: gate
         left: '%payload.review.state%'
@@ -229,7 +229,7 @@ steps:
         head: add-gitignore
         action_id: addGitignore
       - type: respond
-        issue: 7
+        issue: 8
         with: 08_go-to-gitignore.md # Bot response to new PR
         data:
           url: '%actions.addGitignore.data.html_url%'
@@ -265,7 +265,7 @@ steps:
   - title: Merge the pull request
     description: Merge the second pull request with updates to the `.gitignore` file.
     event: pull_request.closed
-    link: '{{ repoUrl }}/pull/8'
+    link: '{{ repoUrl }}/pull/9'
     actions:
       - type: gate
         left: '%payload.pull_request.merged%'
@@ -295,7 +295,7 @@ steps:
   - title: Find historical reference to a previous .env file
     description: Find historical reference to a previously committed .env file
     event: issue_comment.created
-    link: '{{ repoUrl }}/issues/9'
+    link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
         left: '848cd8c2043f6161a4f0043bffee212777281494'
@@ -316,7 +316,7 @@ steps:
   - title: Remove historical reference to a previous .env file
     description: Remove historical reference to a previously committed .env file
     event: issue_comment.created
-    link: '{{ repoUrl }}/issues/9'
+    link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
         left: '848cd8c, 56d6fbb'
