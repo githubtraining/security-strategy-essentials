@@ -197,7 +197,7 @@ steps:
     - type: gate
       left: '%actions.prFiles.data%'
       operator: '==='
-      right: 'filename:js/index.js'
+      right: 'filename:index.js'
       else:
       - type: respond
         with: 07_error-file-change.md #failed response to remove .env file
