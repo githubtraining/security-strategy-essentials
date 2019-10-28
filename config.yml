@@ -196,7 +196,7 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: '!include'
+      operator: '!includes'
       right: 'filename:.env'
       else:
       - type: respond
