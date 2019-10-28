@@ -166,15 +166,13 @@ steps:
             with: 06_accidental-close.md
       - type: createPullRequest
         title: Add wolverine octocat to game
-        body: 06_add-wolverine-image.md # body of the contributor PR
+        body: 06_add-wolverine-image.md
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
-        issue: 8
         with: 06_remove-sensitive-commit.md
       - type: respond
-        issue: 7
-        with: 06_good-merge.md # Bot response to new PR
+        with: 06_good-merge.md
         data:
           url: '%actions.addWolverine.data.html_url%'
 
@@ -201,9 +199,9 @@ steps:
       right: 'filename:.env'
       else:
       - type: respond
-        with: 07_success-file-change.md #failed response to remove .env file
+        with: 07_error-file-change.md #failed response to remove .env file
     - type: respond
-      with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_success-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
 
   # Step 9
   # Learner approves PR

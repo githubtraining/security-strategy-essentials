@@ -22,17 +22,17 @@ You can enable automated security fixes for any repository that uses security al
 
 Here, we have a security alert on the **debug** dependency. Clicking on **debug** will show you the pull request created by Dependabot to update the dependency. We just updated to `2.6.9` but Dependabot noticed we are still outdated.
 
-Feel free to <a href="{{ repoUrl }}/pull/3">approve and merge in this pull request</a>.
+Feel free to [**approve and merge this pull request**]({{ repoUrl }}/pull/4).
 
 <details>
   <summary>How to Install Dependabot if not enabled through automated security fixes</summary>
-  <hr>
-    1. Navigate to Dependabot on the [GitHub Marketplace](https://github.com/marketplace/dependabot-preview)
-    1. Click the "Install it for free" button
-    1. Follow on-screen instructions to add Dependabot to your GitHub profile
-    1. When installing Dependabot, choose `Only select repositories` and choose this repository, {{ repoUrl }}
-    1. On `app.dependabot.com`, under `repos you want to add`, select {{ repoUrl }} and click the `Add selected` button
-  <hr>
+
+    - Navigate to Dependabot on the [GitHub Marketplace](https://github.com/marketplace/dependabot-preview)
+    - Click the "Install it for free" button
+    - Follow on-screen instructions to add Dependabot to your GitHub profile
+    - When installing Dependabot, choose `Only select repositories` and choose this repository, {{ repoUrl }}
+    - On `app.dependabot.com`, under `repos you want to add`, select {{ repoUrl }} and click the `Add selected` button
+    
 </details>
 
 #### Important Note!
