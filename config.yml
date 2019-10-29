@@ -1,4 +1,4 @@
-title: security-strategy-essentials
+title: Security strategy essentials
 tagline: A brand new course on Learning Lab
 description: 'Course repo for Learning Lab course "Security strategy essentials"'
 template:
@@ -154,7 +154,7 @@ steps:
 
   # Step 7
 
-  - title: Merge the pull request
+  - title: Merge the SECURITY.md pull request
     description: Merge the pull request.
     event: pull_request.closed
     link: "{{ repoUrl }}/pull/7"
