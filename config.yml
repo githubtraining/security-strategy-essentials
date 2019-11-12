@@ -319,7 +319,7 @@ steps:
     link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
-        left: '/(Add empty .gitignore file)|(Remove .env file)/g'
+        left: '/(Add .env file)|(Remove .env file)/g'
         operator: '!test'
         right: '%payload.comment.body%'
         else:
