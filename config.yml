@@ -319,25 +319,25 @@ steps:
     link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
-        left: '848cd8c, 56d6fbb'
-        operator: test
+        left: '/(Add empty .gitignore file)|(Remove .env file)/g'
+        operator: !test
         right: '%payload.comment.body%'
         else:
-          - type: octokit
-            method: repos.getPages
-            owner: '%payload.repository.owner.login%'
-            repo: '%payload.repository.name%'
-            action_id: pagesUrl
-          - type: createIssue
-            title: Congratulations!
-            body: 12_final-issue.md
-            data:
-              url: '%actions.pagesUrl.data.html_url%'
-            action_id: finalIssue
-          - type: updateBranchProtection
-          - type: respond
-            with: 12_correct-references-removed.md # replace with nice job removing .env file response
-            data:
-              url: '%actions.finalIssue.data.html_url%'
+        - type: respond
+          with: 12_try-again-response.md
+      - type: octokit
+        method: repos.getPages
+        owner: '%payload.repository.owner.login%'
+        repo: '%payload.repository.name%'
+        action_id: pagesUrl
+      - type: createIssue
+        title: Congratulations!
+        body: 12_final-issue.md
+        data:
+          pagesUrl: '%actions.pagesUrl.data.html_url%'
+        action_id: finalIssue
+      - type: updateBranchProtection
       - type: respond
-        with: 12_try-again-response.md
+        with: 12_correct-references-removed.md # replace with nice job removing .env file response
+        data:
+          url: '%actions.finalIssue.data.html_url%'
