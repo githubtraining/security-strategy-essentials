@@ -170,8 +170,8 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
-        issue: Add wolverine octocat to game
-        with: '%actions.addWolverine.data.number%'
+        issue: '%actions.addWolverine.data.number%'
+        with: 06_remove-sensitive-commit.md
       - type: respond
         with: 06_good-merge.md
         data:
