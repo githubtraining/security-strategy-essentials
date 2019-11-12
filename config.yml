@@ -133,7 +133,7 @@ steps:
       body: 05_add-security-policy.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
     - type: respond
-      issue: 5
+      issue: Add Dependabot to your repository
       with: 05_successful-close.md #link to security issue
       data:
         url: '%actions.securityIssue.data.html_url%'
@@ -170,7 +170,7 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
-        issue: 8
+        issue: Add wolverine octocat to game
         with: 06_remove-sensitive-commit.md
       - type: respond
         with: 06_good-merge.md
@@ -229,7 +229,7 @@ steps:
         head: add-gitignore
         action_id: addGitignore
       - type: respond
-        issue: 8
+        issue: Add wolverine octocat to game
         with: 08_go-to-gitignore.md # Bot response to new PR
         data:
           url: '%actions.addGitignore.data.html_url%'
