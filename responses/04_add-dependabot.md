@@ -1,4 +1,4 @@
-## Automated dependency Updates with Dependabot
+## Automated dependency updates with Dependabot
 
 Manually going through your dependencies for alerts and outdated versions is tedious work. Let's automate this process!
 
