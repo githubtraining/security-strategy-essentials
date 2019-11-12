@@ -319,7 +319,7 @@ steps:
     link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
-        left: '/(Add .env file)|(Remove .env file)/g'
+        left: '/(848cd8c)|(56d6fbb)/g'
         operator: '!test'
         right: '%payload.comment.body%'
         else:
