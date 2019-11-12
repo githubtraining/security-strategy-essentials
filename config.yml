@@ -111,7 +111,7 @@ steps:
           with: 04_accidental-close.md
       - type: updateBranchProtection
       - type: createIssue
-        title: Add dependabot to your repository
+        title: Add Dependabot to your repository
         body: 04_add-dependabot.md #dependabot issue body response
         action_id: dependabotIssue
       - type: respond
@@ -123,8 +123,8 @@ steps:
   # Learner installs dependabot on repository and closes the issue
   # Bot creates new issue about adding a security policy with suggested information about the security policy. Prompts learner to merge when ready
 
-  - title: Enable dependabot
-    description: Install dependabot on your repository.
+  - title: Enable Dependabot
+    description: Install Dependabot on your repository.
     event: issues.closed
     link: '{{ repoUrl }}/issues/5'
     actions:
