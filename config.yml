@@ -48,7 +48,7 @@ steps:
         with: 01_closed-issue.md
         data:
           url: '%actions.firstIssue.data.html_url%'
-          pages: '%actions.pagesUrl.data.html_url%'
+          pagesUrl: '%actions.pagesUrl.data.html_url%'
 
   # Step 2
   # Learner comments on issue with the recommended updated version
