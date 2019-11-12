@@ -82,7 +82,7 @@ steps:
         right: '%actions.fileContents%'
         else:
         - type: respond
-          issue: 4
+          issue: Update the vulnerable dependency
           with: 03_adding-bad-changes.md
       - type: removeBranchProtection
       - type: respond
