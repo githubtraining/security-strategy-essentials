@@ -1,4 +1,4 @@
-Nice work opening this pull request. I went a head and approved it, go ahead and merge when ready.
+Nice work opening this pull request. I went ahead and approved it, go ahead and merge when ready.
 
 ### :keyboard: Activity: Merge
 1. Merge this pull request.

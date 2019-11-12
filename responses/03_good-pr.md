@@ -2,7 +2,7 @@
 
 Great job, @{{ user.username }}, your pull request looks good. Thank you for fixing the vulnerable dependency!
 
-_Note: You might notice that this repository has a `package.json` file, but no `package-lock.json` file. We are doing all parts of this activity on GitHub.com. If you work with other repositories, you might notice some differences. Regardless of what dependency files you use, the main concepts of this course still apply._
+_Note: You might notice that this repository has a `package.json` file, but no `package-lock.json` file. In production code it's a good idea to have both files to avoid conflicts resolving the proper version of a dependency. For simplicity, we'll use only `package.json`, but GitHub monitors both files in addition to the gamut of supported languages and packages_
 
 ### :keyboard: Activity: Merge
 1. Merge this pull request.

@@ -48,7 +48,7 @@ steps:
         with: 01_closed-issue.md
         data:
           url: '%actions.firstIssue.data.html_url%'
-          pages: '%actions.pagesUrl.data.html_url%'
+          pagesUrl: '%actions.pagesUrl.data.html_url%'
 
   # Step 2
   # Learner comments on issue with the recommended updated version
@@ -82,7 +82,7 @@ steps:
         right: '%actions.fileContents%'
         else:
         - type: respond
-          issue: 4
+          issue: Update the vulnerable dependency
           with: 03_adding-bad-changes.md
       - type: removeBranchProtection
       - type: respond
@@ -111,7 +111,7 @@ steps:
           with: 04_accidental-close.md
       - type: updateBranchProtection
       - type: createIssue
-        title: Add dependabot to your repository
+        title: Add Dependabot to your repository
         body: 04_add-dependabot.md #dependabot issue body response
         action_id: dependabotIssue
       - type: respond
@@ -123,8 +123,8 @@ steps:
   # Learner installs dependabot on repository and closes the issue
   # Bot creates new issue about adding a security policy with suggested information about the security policy. Prompts learner to merge when ready
 
-  - title: Enable dependabot
-    description: Install dependabot on your repository.
+  - title: Enable Dependabot
+    description: Install Dependabot on your repository.
     event: issues.closed
     link: '{{ repoUrl }}/issues/5'
     actions:
@@ -133,7 +133,7 @@ steps:
       body: 05_add-security-policy.md #security policy issue body (add branch name instructions and examples)
       action_id: securityIssue
     - type: respond
-      issue: 5
+      issue: Add Dependabot to your repository
       with: 05_successful-close.md #link to security issue
       data:
         url: '%actions.securityIssue.data.html_url%'
@@ -170,7 +170,7 @@ steps:
         head: add-wolverine-image
         action_id: addWolverine
       - type: respond
-        issue: 8
+        issue: '%actions.addWolverine.data.number%'
         with: 06_remove-sensitive-commit.md
       - type: respond
         with: 06_good-merge.md
@@ -196,14 +196,14 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: includes
+      operator: '!includes'
       right: 'filename:.env'
       required: false
       else:
       - type: respond
-        with: 07_success-file-change.md #failed response to remove .env file
+        with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
     - type: respond
-      with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_success-file-change.md #failed response to remove .env file
 
   # Step 9
   # Learner approves PR
@@ -229,7 +229,7 @@ steps:
         head: add-gitignore
         action_id: addGitignore
       - type: respond
-        issue: 8
+        issue: Add wolverine octocat to game
         with: 08_go-to-gitignore.md # Bot response to new PR
         data:
           url: '%actions.addGitignore.data.html_url%'
@@ -298,7 +298,7 @@ steps:
     link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
-        left: '848cd8c2043f6161a4f0043bffee212777281494'
+        left: '848cd8'
         operator: test
         right: '%payload.comment.body%'
         else:
@@ -319,25 +319,25 @@ steps:
     link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
-        left: '848cd8c, 56d6fbb'
-        operator: test
+        left: '/(848cd8c)|(56d6fbb)/g'
+        operator: '!test'
         right: '%payload.comment.body%'
         else:
-          - type: octokit
-            method: repos.getPages
-            owner: '%payload.repository.owner.login%'
-            repo: '%payload.repository.name%'
-            action_id: pagesUrl
-          - type: createIssue
-            title: Congratulations!
-            body: 12_final-issue.md
-            data:
-              url: '%actions.pagesUrl.data.html_url%'
-            action_id: finalIssue
-          - type: updateBranchProtection
-          - type: respond
-            with: 12_correct-references-removed.md # replace with nice job removing .env file response
-            data:
-              url: '%actions.finalIssue.data.html_url%'
+        - type: respond
+          with: 12_try-again-response.md
+      - type: octokit
+        method: repos.getPages
+        owner: '%payload.repository.owner.login%'
+        repo: '%payload.repository.name%'
+        action_id: pagesUrl
+      - type: createIssue
+        title: Congratulations!
+        body: 12_final-issue.md
+        data:
+          pagesUrl: '%actions.pagesUrl.data.html_url%'
+        action_id: finalIssue
+      - type: updateBranchProtection
       - type: respond
-        with: 12_try-again-response.md
+        with: 12_correct-references-removed.md # replace with nice job removing .env file response
+        data:
+          url: '%actions.finalIssue.data.html_url%'

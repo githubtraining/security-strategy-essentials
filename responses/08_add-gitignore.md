@@ -1,4 +1,4 @@
-Removing the previous `.env` file from a random pull request is great, but how can we make sure other contributions don't include sensitive files by mistake? We can do this by adding a `.gitignore` file to our repository.
+Removing the previous `.env` file from the branch is great, but it's reactive. We need to ensure future contributions don't include sensitive files by mistake. We can do this by adding a `.gitignore` file to our repository.
 
 ## Taking advantage of the `.gitignore` file
 
@@ -8,7 +8,7 @@ From time to time, there are files you don't want Git to check in to GitHub. You
 
 Git uses a file called `.gitignore` to decide which files and directories to ignore when committing.  Keep files containing sensitive data, like configuration or `.env` files, out of your repositories. This is one way to promote security best practices.
 
-The `.gitignore` file can, and should, be committed into your repository.  By sharing this file and making it part of your code, it will also help others. Other users that contribute to the repository will also avoid committing sensitive data. There are many examples of `.gitignore` files available for you to use in your own repositories. You can find them in the [gitignore](https://github.com/github/gitignore) repository.
+The `.gitignore` file can, and should, be committed into your repository.  By sharing this file and making it part of your code, future contributors to the repository will avoid committing sensitive data. There are many examples of `.gitignore` files available for you to use in your own repositories. You can find them in the [gitignore](https://github.com/github/gitignore) repository.
 
 ## Step 10: Add a `.gitignore` file
 

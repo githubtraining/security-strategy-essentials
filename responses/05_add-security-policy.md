@@ -8,17 +8,17 @@ This gives collaborators the important security information they need, but it al
 
 Just like a `README.md` file, it really depends on your repository and the requirements and workflows. Here are a few common topics that are documented in a security policy:
 
-1. Supported versions
-1. How to responsibly report a security vulnerability
-1. Security related configuration
-1. Known security gaps and future enhancements
+- Supported versions
+- How to responsibly report a security vulnerability
+- Security related configuration
+- Known security gaps and future enhancements
 
 
 ## Step 6: Add a SECURITY.md file
 
 1. Navigate to the [Security]({{ repoUrl }}/network/alerts) tab
 1. Click on Policy located in the left sidebar
-1. Click the `Start Setup` button
+1. Click the **Start Setup** button
 1. Commit the template security policy to the new branch as selected `{{ user.username }}-patch-1`
 1. Commit the new file and create the pull request
 
