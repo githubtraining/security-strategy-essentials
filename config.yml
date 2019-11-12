@@ -196,14 +196,14 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: includes
+      operator: !includes
       right: 'filename:.env'
       required: false
       else:
       - type: respond
-        with: 07_success-file-change.md #failed response to remove .env file
+        with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
     - type: respond
-      with: 07_error-file-change.md #success response to remove .env file | Add note about contacting support for garbage collection
+      with: 07_success-file-change.md #failed response to remove .env file
 
   # Step 9
   # Learner approves PR
@@ -298,7 +298,7 @@ steps:
     link: '{{ repoUrl }}/issues/10'
     actions:
       - type: gate
-        left: '848cd8c2043f6161a4f0043bffee212777281494'
+        left: '848cd8'
         operator: test
         right: '%payload.comment.body%'
         else:
