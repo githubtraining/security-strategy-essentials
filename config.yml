@@ -196,7 +196,7 @@ steps:
       action_id: prFiles
     - type: gate
       left: '%actions.prFiles.data%'
-      operator: !includes
+      operator: '!includes'
       right: 'filename:.env'
       required: false
       else:
@@ -320,7 +320,7 @@ steps:
     actions:
       - type: gate
         left: '/(Add empty .gitignore file)|(Remove .env file)/g'
-        operator: !test
+        operator: '!test'
         right: '%payload.comment.body%'
         else:
         - type: respond
