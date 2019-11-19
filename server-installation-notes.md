@@ -1,9 +1,11 @@
 ## GitHub Enterprise Server (GHES) installation notes
 
-✅ | This course is fully compatible with any supported version* of GHES.
+🚫 | This course needs features not yet supported by GHES.
 --- | ---
 
-*Supported versions of GHES are visible by using the drop-down in the [official documentation](https://help.github.com/enterprise/).
+This course makes use of automated security updates from [Dependabot](https://help.github.com/en/github/managing-security-vulnerabilities/configuring-automated-security-updates), which is currently not available to GHES.
+
+This course makes use of the [Security](https://help.github.com/en/github/managing-security-vulnerabilities/adding-a-security-policy-to-your-repository) tab, which is not currently available on GHES.
 
 ### Course dependencies
 
