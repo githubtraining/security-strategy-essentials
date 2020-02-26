@@ -21,3 +21,11 @@ In this course, you’ll learn how to:
 - Remove a commit exposing sensitive data in a pull request
 - Keep sensitive files out of your repository by leveraging the use of a `.gitignore` file
 - Remove historical commits exposing sensitive data deep in your repository
+
+## What you'll build
+
+## Prerequisites
+
+## Projects used
+
+## Audience
