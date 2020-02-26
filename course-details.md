@@ -33,4 +33,7 @@ In this course, you’ll learn how to:
 
 ## Projects used
 
+This course makes use of the following open source projects. Consider exploring these repos and maybe even making contributions!
+- [Octocat Memory Game](https://codepen.io/mayurbirle/pen/rwozYP) on CodePen
+
 ## Audience
