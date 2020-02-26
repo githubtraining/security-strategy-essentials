@@ -24,6 +24,11 @@ In this course, you’ll learn how to:
 
 ## What you'll build
 
+![A picture matching game in play](https://user-images.githubusercontent.com/16547949/75375742-b307d980-589c-11ea-960d-e1ce576472b6.gif)
+
+- Completed [source repository](https://github.com/githubtraining/security-strategy-essentials-demo)
+- [Deployed game](https://githubtraining.github.io/security-strategy-essentials-demo/)
+
 ## Prerequisites
 
 ## Projects used
