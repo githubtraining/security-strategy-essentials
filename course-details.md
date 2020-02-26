@@ -21,5 +21,3 @@ In this course, you’ll learn how to:
 - Remove a commit exposing sensitive data in a pull request
 - Keep sensitive files out of your repository by leveraging the use of a `.gitignore` file
 - Remove historical commits exposing sensitive data deep in your repository
-
-This course has a dedicated message board on the [GitHub Community Forum]({{ communityBoard }}). Create a post to start a conversation, discuss this course with GitHub Trainers and participants, or troubleshoot any issues you encounter.
