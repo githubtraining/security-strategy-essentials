@@ -2,6 +2,17 @@ This course will show you how to build, host, and maintain a secure repository o
 
 Collaboration is key to building great software. As you welcome more contributions, keeping your project secure becomes more important than ever.
 
+## What you'll learn
+
+This course will answer common questions like:
+- How can I prevent sensitive data from being pushed to my repository?
+- How do I remove traces of the sensitive data if it is indeed published? 
+- How do I use GitHub's vulnerability alerts? 
+- How do I automatically fix vulnerable dependencies?
+- What's a security policy and how do I implement one?
+- What's `.gitignore` and how do I use it?
+- How can I trace sensitive data to its introduction?
+
 In this course, you’ll learn how to:
 - Enable vulnerable dependency detection for private repositories
 - Detect and fix outdated dependencies with security vulnerabilities
