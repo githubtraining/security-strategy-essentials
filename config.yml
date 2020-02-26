@@ -1,6 +1,5 @@
 title: Security strategy essentials
-tagline: A brand new course on Learning Lab
-description: 'Course repo for Learning Lab course "Security strategy essentials"'
+description: Learn security best practices and keep your project’s contributions—and contributors—safe.
 template:
   repo: security-strategy-essentials-template
   name: security-strategy-essentials
@@ -341,3 +340,7 @@ steps:
         with: 12_correct-references-removed.md # replace with nice job removing .env file response
         data:
           url: '%actions.finalIssue.data.html_url%'
+
+tags: [
+  "Security", "Dependency management", "Rebasing", "Auditing", "Dependabot"
+]
