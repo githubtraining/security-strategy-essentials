@@ -31,7 +31,7 @@ In this course, you’ll learn how to:
 
 ## Prerequisites
 
-This course is a great introduction. If you're unfamiliar with working with Pull Requests, consider taking:
+This course is a great introduction. If you're unfamiliar with working in Pull Requests, consider taking the following course.
 - [Introduction to GitHub](https://github.com/githubtraining/caption-this-template)
 
 ## Projects used
