@@ -40,3 +40,5 @@ This course makes use of the following open source projects. Consider exploring 
 - [Octocat Memory Game](https://codepen.io/mayurbirle/pen/rwozYP) on CodePen
 
 ## Audience
+
+Developers, New GitHub users, Teams, Security professionals
