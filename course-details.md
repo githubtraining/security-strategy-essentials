@@ -41,4 +41,4 @@ This course makes use of the following open source projects. Consider exploring 
 
 ## Audience
 
-Developers, New GitHub users, Teams, Security professionals
+Developers, new GitHub users, teams, security professionals, open source maintainers
