@@ -38,7 +38,7 @@ steps:
         body: 01_find-vulnerabilities.md
         action_id: firstIssue
       - type: closeIssue
-        issue: '{{ welcomeIssueNumber }}'
+        issue: '{{ store.welcomeIssueNumber }}'
       - type: octokit
         method: repos.getPages
         owner: '%payload.repository.owner.login%'
