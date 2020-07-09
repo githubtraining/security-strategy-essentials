@@ -19,6 +19,8 @@ before:
     body: 00_introduction-issue.md
     data:
       private: '%actions.gotten_repo.data.private%'
+    store:
+      welcomeIssueNumber: '{{ result.data.number }}'
 
 steps:
 
@@ -36,7 +38,7 @@ steps:
         body: 01_find-vulnerabilities.md
         action_id: firstIssue
       - type: closeIssue
-        issue: Welcome
+        issue: '{{ store.welcomeIssueNumber }}'
       - type: octokit
         method: repos.getPages
         owner: '%payload.repository.owner.login%'
