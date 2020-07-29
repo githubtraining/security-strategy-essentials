@@ -30,7 +30,7 @@ This project is centered around a memory game that will be deployed with GitHub 
 1. Click the [**Settings**]({{ repoUrl }}/settings) tab in your repository.
 1. Scroll down until you see **Data services**.
 1. Under **Data services**, click the check boxes to enable all the data services.
-2. Scroll down to **GitHub Pages**. Select `master` as a **Source**.
+2. Scroll down to **GitHub Pages** and set your [default branch as the source](https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site), usually `main` or `master`.
 
 {% else %}
 
