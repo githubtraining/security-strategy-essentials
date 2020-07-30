@@ -29,13 +29,13 @@ GitHub receives a notification of a newly-announced vulnerability. Next, we chec
 
 ## Step 2: Find this repository's vulnerable dependencies
 
-Use GitHub's security alerts to identify a vulnerable NPM dependency.
+Use Dependabot alerts to identify a vulnerable NPM dependency.
 
 ### :keyboard: Activity: Identify the suggested version update
 
-1. Click the **Insights** tab in your repository.
-2. On the left hand navigation bar, click **Dependency graph**.
-3. Scroll down until you see a yellow bar highlighting the dependency named `debug`, and click on the right hand side of the yellow `debug` section.
+1. Click the **Security** tab in your repository.
+2. On the left hand navigation bar, click **Dependabot alerts**.
+3. Click on the `debug` alert.
 4. Take note of the suggested version.
 5. Comment in this issue with the suggested update version.
 
