@@ -24,7 +24,7 @@ before:
 
 steps:
 
-  # Step 1
+  # Step 1:
   # Learner enables GH pages for game
   # Bot creates issue to report a vulnerability
 
