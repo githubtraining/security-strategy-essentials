@@ -10,7 +10,7 @@ This repository has some existing dependencies which will need updating to stay 
 
 This repository is a Node.js project utilizing NPM. Because of that, [`package.json`]({{ repoUrl }}/blob/master/package.json) defines this repository's dependencies.  For our time together, we'll be focusing on these JavaScript dependencies. Keep in mind that different programming languages may have different dependency manifests. You might work with a `Gemfile`, `Gemfile.lock`, `*.gemspec`, `requirements.txt`, `pipfile.lock`, or other files.
 
-How can we know these dependencies are secure? GitHub monitors a number of reputable [data sources](https://help.github.com/en/github/managing-security-vulnerabilities/about-security-alerts-for-vulnerable-dependencies#data-sources-for-security-alerts) to track vulnerabilities across projects.
+How can we know these dependencies are secure? GitHub monitors a number of reputable [data sources](https://docs.github.com/en/github/managing-security-vulnerabilities/about-alerts-for-vulnerable-dependencies#detection-of-vulnerable-dependencies) to track vulnerabilities across projects.
 
   <hr>
 </details>
@@ -21,7 +21,7 @@ You may notice some alerts from GitHub about this repository. You may get an ema
 
 ![dependency vulnerability alert](https://user-images.githubusercontent.com/9906718/46882979-c275b680-ce50-11e8-9f47-2081daf20b98.png)
 
-GitHub tracks vulnerabilities for a number of [supported languages](https://help.github.com/en/github/visualizing-repository-data-with-graphs/listing-the-packages-that-a-repository-depends-on#supported-languages) and their associated package managers, including RubyGems, NPM, Python PIP, Maven, and Nuget.
+GitHub tracks vulnerabilities for a number of supported languages and their associated [package ecosystems](https://docs.github.com/en/github/visualizing-repository-data-with-graphs/about-the-dependency-graph#supported-package-ecosystems), including RubyGems, NPM, Python PIP, Maven, and .NET.
 
 GitHub receives a notification of a newly-announced vulnerability. Next, we check for repositories that use the affected version of that dependency. We send security alerts to a set of people within those affected repositories. The owners are contacted by default and it's possible to configure specific teams or individuals to get these important notifications.
 
