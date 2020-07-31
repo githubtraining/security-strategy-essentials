@@ -15,8 +15,8 @@ This course will answer common questions like:
 
 In this course, you’ll learn how to:
 - Enable vulnerable dependency detection for private repositories
-- Detect and fix outdated dependencies with security vulnerabilities
-- Automate the detection of vulnerable dependencies with Dependabot
+- Detect and fix outdated dependencies
+- Automate the detection and fix of vulnerable dependencies with Dependabot
 - Add a security policy with the a `SECURITY.md` file
 - Remove a commit exposing sensitive data in a pull request
 - Keep sensitive files out of your repository by leveraging the use of a `.gitignore` file
