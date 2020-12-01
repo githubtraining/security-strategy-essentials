@@ -35,9 +35,10 @@ Use Dependabot alerts to identify a vulnerable NPM dependency.
 
 1. Click the **Security** tab in your repository.
 2. On the left hand navigation bar, click **Dependabot alerts**.
-3. Click on the `debug` alert.
-4. Take note of the suggested version.
-5. Comment in this issue with the suggested update version.
+3. Follow the instructions to enable Dependabot alerts, if they're not already enabled. 
+4. Click on the `debug` alert.
+5. Take note of the suggested version.
+6. Comment in this issue with the suggested update version.
 
 
 > _**GitHub Enterprise Server only:** This is all possible on GitHub Enterprise through GitHub Connect. It may take up to an hour to refresh the alerts and make them visible. After waiting a reasonable amount of time, if you are still not seeing the yellow bar in the Dependency Graph, you may want to contact your administrator. In the mean time, to move along with the course, we'll give you a hint - the recommended upgraded version is `2.6.9`._
