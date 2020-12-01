@@ -8,7 +8,7 @@ This repository has some existing dependencies which will need updating to stay 
   <summary>How can we identify dependencies and if they are vulnerable?</summary>
   <hr>
 
-This repository is a Node.js project utilizing NPM. Because of that, [`package.json`]({{ repoUrl }}/blob/master/package.json) defines this repository's dependencies.  For our time together, we'll be focusing on these JavaScript dependencies. Keep in mind that different programming languages may have different dependency manifests. You might work with a `Gemfile`, `Gemfile.lock`, `*.gemspec`, `requirements.txt`, `pipfile.lock`, or other files.
+This repository is a Node.js project utilizing NPM. Because of that, [`package.json`]({{ repoUrl }}/blob/main/package.json) defines this repository's dependencies.  For our time together, we'll be focusing on these JavaScript dependencies. Keep in mind that different programming languages may have different dependency manifests. You might work with a `Gemfile`, `Gemfile.lock`, `*.gemspec`, `requirements.txt`, `pipfile.lock`, or other files.
 
 How can we know these dependencies are secure? GitHub monitors a number of reputable [data sources](https://docs.github.com/en/github/managing-security-vulnerabilities/about-alerts-for-vulnerable-dependencies#detection-of-vulnerable-dependencies) to track vulnerabilities across projects.
 
@@ -35,9 +35,10 @@ Use Dependabot alerts to identify a vulnerable NPM dependency.
 
 1. Click the **Security** tab in your repository.
 2. On the left hand navigation bar, click **Dependabot alerts**.
-3. Click on the `debug` alert.
-4. Take note of the suggested version.
-5. Comment in this issue with the suggested update version.
+3. Follow the instructions to enable Dependabot alerts, if they're not already enabled. 
+4. Click on the `debug` alert.
+5. Take note of the suggested version.
+6. Comment in this issue with the suggested update version.
 
 
 > _**GitHub Enterprise Server only:** This is all possible on GitHub Enterprise through GitHub Connect. It may take up to an hour to refresh the alerts and make them visible. After waiting a reasonable amount of time, if you are still not seeing the yellow bar in the Dependency Graph, you may want to contact your administrator. In the mean time, to move along with the course, we'll give you a hint - the recommended upgraded version is `2.6.9`._

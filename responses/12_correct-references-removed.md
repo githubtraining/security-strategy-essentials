@@ -8,7 +8,7 @@ This is why you need to consider local work and branches that are based on this 
 
 ### Is the sensitive information gone?
 
-Those commits no longer show in the file contents in your repository history. You can see this by navigating to your <a href="{{ repoUrl }}/commits/master">repository's commit history</a> and clicking on the "Add .env file" commit. Notice that there are now no referenced files or content recorded.
+Those commits no longer show in the file contents in your repository history. You can see this by navigating to your <a href="{{ repoUrl }}/commits/main">repository's commit history</a> and clicking on the "Add .env file" commit. Notice that there are now no referenced files or content recorded.
 
 However, we can still access the cached commit if we know the old commit ID: {{ repoUrl }}/commit/848cd8c2043f6161a4f0043bffee212777281494
 

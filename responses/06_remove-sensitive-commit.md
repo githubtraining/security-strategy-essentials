@@ -11,7 +11,7 @@ We can do this by cloning this repository to our computer, and then running a fe
 1. Clone this repository locally by running `git clone {{ repoUrl }}.git`
 1. CD into your newly cloned repository with `cd security-strategy-essentials`
 1. Checkout to the contributor's branch with `git checkout add-wolverine-image`
-1. Remove the unwanted commit that introduced the `.env` file with a rebase. You can do this with `git rebase -i master` and then remove the entire commit so only the `Add wolverine image to game` commit remains
+1. Remove the unwanted commit that introduced the `.env` file with a rebase. You can do this with `git rebase -i main` and then remove the entire commit so only the `Add wolverine image to game` commit remains
 1. Run `git push -f` to force push your changes to the branch on GitHub
 
 <hr>
