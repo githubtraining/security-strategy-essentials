@@ -58,7 +58,7 @@ steps:
   - title: Find the vulnerable dependency
     description: Find the vulnerable dependency, and comment with the suggested update version.
     event: issue_comment.created
-    link: '{{ repoUrl }}/issues/4'
+    link: '{{ repoUrl }}/issues/3'
     actions:
       - type: respond
         with: 02_found-vulnerability.md
